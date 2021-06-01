@@ -36,7 +36,16 @@ class LinkedList {
   /** unshift(val): add new value to start of list. */
 
   unshift(val) {
-
+    let newNode = new Node(val);
+    if (this.length === 0) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+    this.length += 1;
+    return undefined;
   }
 
   /** pop(): return & remove last item. */
@@ -79,6 +88,22 @@ class LinkedList {
 
   average() {
     
+  }
+
+  traverse() {
+    let current = this.head;
+    while (current !== null) {
+      console.log(current.val);
+      current = current.next;
+    }
+  }
+
+  find(val) {
+    let current = this.head;
+    while (current) {
+      if (current.val === val) return true;
+    }
+    return false;
   }
 }
 
