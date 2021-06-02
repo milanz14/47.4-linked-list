@@ -74,7 +74,14 @@ class LinkedList {
   /** shift(): return & remove first item. */
 
   shift() {
-
+    if (this.length === 0) return undefined;
+    let oldHead = this.head;
+    this.head = oldHead.next;
+    this.length -= 1;
+    if (this.length === 0) {
+      this.tail = null;
+    }
+    return oldHead;
   }
 
   /** getAt(idx): get val at idx. */
