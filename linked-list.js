@@ -51,6 +51,23 @@ class LinkedList {
   /** pop(): return & remove last item. */
 
   pop() {
+    if (this.length === 0) {
+      throw new Error('The linked list is empty - cannot pop')
+    }
+    let currentNode = this.head;
+    let newTail = currentNode;
+    while (currentNode.next) {
+      newTail = currentNode;
+      currentNode = currentNode.next;
+    }
+    this.tail = newTail;
+    this.tail.next = null;
+    this.length -= 1;
+    if (this.length === 0) {
+      this.head = null;
+      this.tail = null;
+    }
+    return currentNode;  
 
   }
 
