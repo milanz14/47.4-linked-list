@@ -87,31 +87,79 @@ class LinkedList {
   /** getAt(idx): get val at idx. */
 
   getAt(idx) {
+    if (idx < 0 || idx >= this.length) {
+      throw new Error('Invalid Index - out of bounds of linked list.')
+    }
+    let currentNode = this.head;
+    let counter = 0;
+    while (idx !== counter) {
+      currentNode = currentNode.next;
+      counter += 1;
+    }
+    return currentNode;
 
   }
 
   /** setAt(idx, val): set val at idx to val */
 
   setAt(idx, val) {
-
+    let foundNode = this.getAt(idx);
+    if (foundNode) {
+      foundNode.val = val;
+    }
+    throw new Error('Invalid Index - out of bounds of linked list')
   }
 
   /** insertAt(idx, val): add node w/val before idx. */
 
   insertAt(idx, val) {
-
+    let newNode = new Node(val);
+    if (idx < 0 || idx > this.length) {
+      throw new Error('This index is invalid')
+    }
+    if (idx === this.length) {
+      this.push(newNode);
+    }
+    if (idx === 0) {
+      this.unshift(newNode);
+    }
+    let prev = this.getAt(idx - 1);
+    let temp = prev.next;
+    prev.next = newNode;
+    newNode.next = temp;
+    this.length += 1;
+    return undefined;
   }
 
   /** removeAt(idx): return & remove item at idx, */
 
   removeAt(idx) {
-
+    if (idx < 0 || idx > this.length) {
+      throw new Error('Invalid index - out of bounds')
+    }
+    if (idx === this.length -1) {
+      return this.pop(idx);
+    }
+    if (idx === 0) {
+      return this.shift(idx);
+    }
+    let prevNode = this.getAt(idx - 1);
+    let removedNode = prevNode.next;
+    prevNode.next = removedNode.next;
+    this.length -= 1;
+    return removedNode.val;
   }
 
   /** average(): return an average of all values in the list */
 
   average() {
-    
+    let currentNode = this.head
+    let counter = 0;
+    for (let i = 0; i < this.length; i++) {
+      counter += currentNode.val;
+      currentNode = currentNode.next;
+    }
+    return counter / this.length;
   }
 
   traverse() {
